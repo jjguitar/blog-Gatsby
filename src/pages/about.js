@@ -1,16 +1,28 @@
 import React from "react"
-import Header from '../components/header'
+import { graphql } from "gatsby" // highlight-line
 import Layout from "../components/layout"
 
-export default function About() {
+// highlight-next-line
+export default function About({ data }) {
   return (
     <Layout>
-      <Header headerText="About Gatsby" />
-      <Header headerText="It's pretty cool" />
-      <h1>About me</h1>
+      <h1>About {data.site.siteMetadata.title}</h1> {/* highlight-line */}
       <p>
-        I’m good enough, I’m smart enough, and gosh darn it, people like me!
+        We're the only site running on your computer dedicated to showing the
+        best photos and videos of pandas eating lots of food.
       </p>
     </Layout>
   )
 }
+
+// highlight-start
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
+// highlight-end
